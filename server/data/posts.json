@@ -1,0 +1,17 @@
+[
+    {
+        "title": "First Post",
+        "content": "This is the content of the first post.",
+        "likeCount": 10
+    },
+    {
+        "title": "Second Post",
+        "content": "Here is some more content for the second post.",
+        "likeCount": 5
+    },
+    {
+        "title": "Third Post",
+        "content": "Another post with interesting content.",
+        "likeCount": 8
+    }
+]
