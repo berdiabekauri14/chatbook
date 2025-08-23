@@ -24,3 +24,4 @@ mongoose.connect(process.env.URL)
         })
     })
     .catch(() => console.log("Error has been found in your code"))
+
