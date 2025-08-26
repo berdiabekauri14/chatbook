@@ -1,8 +1,8 @@
-const posts = require("../data/posts.json")
 const Post = require("../models/post.model.js")
+const posts = await Post.find();
 
-const getPosts = (req, res) => {
-    res.json(posts)
+const getPosts = async (req, res) => {
+    res.status(200).json(posts);
 }
 
 const getPost = (req, res) => {
