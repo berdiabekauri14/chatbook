@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const mongoose = require("mongoose")
 const postRouter = require('./router/post.router.js')
+const userRouter = require("./routers/user.router.js")
 
 const app = express()
 
@@ -15,6 +16,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json())
 
 app.use("/api/posts", postRouter)
+
+app.use("/api/users", userRouter)
 
 mongoose.connect(process.env.URL)
     .then(() => {

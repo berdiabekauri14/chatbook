@@ -2,9 +2,18 @@ const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema(
     {
-        title: String,
-        content: String,
-        likesCount: Number
+        title: {
+            type: String,
+            required: true
+        },
+        content: {
+            type: String,
+            required: true
+        },
+        likesCount: {
+            type: Number,
+            default: 0
+        }
     }
 )
 

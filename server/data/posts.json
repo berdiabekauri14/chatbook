@@ -3,18 +3,44 @@
         "id": 1,
         "title": "First Post",
         "content": "This is the content of the first post.",
-        "likeCount": 10
+        "likeCount": 10,
+        "comments": [
+            {
+                "id": 1,
+                "author": "Alice",
+                "text": "Great first post!"
+            },
+            {
+                "id": 2,
+                "author": "Bob",
+                "text": "Looking forward to more."
+            }
+        ]
     },
     {
         "id": 2,
         "title": "Second Post",
         "content": "Here is some more content for the second post.",
-        "likeCount": 5
+        "likeCount": 5,
+        "comments": [
+            {
+                "id": 1,
+                "author": "Charlie",
+                "text": "Nice update!"
+            }
+        ]
     },
     {
         "id": 3,
         "title": "Third Post",
         "content": "Another post with interesting content.",
-        "likeCount": 8
+        "likeCount": 8,
+        "comments": [
+            {
+                "id": 1,
+                "author": "Dana",
+                "text": "Very interesting read."
+            }
+        ]
     }
 ]

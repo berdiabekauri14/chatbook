@@ -1,13 +1,13 @@
 const Post = require("../models/post.model.js")
-const posts = await Post.find();
 
 const getPosts = async (req, res) => {
+    const posts = await Post.find();
+
     res.status(200).json(posts);
 }
 
-const getPost = (req, res) => {
-    const postId = parseInt(req.params.id)
-    const post = posts.find(el => el === postId * 1)
+const getPost = async (req, res) => {
+    const post = await Post.findById(req.params.id)
 
     if (post) {
         res.json(post)
@@ -41,27 +41,25 @@ const createPost = async (req, res) => {
     res.status(201).json(newPost);
 }
 
-const deletePost = (req, res) => {
-    const postId = parseInt(req.params.id);
-    const post = posts.find(el => el === postId * 1)
+const deletePost = async (req, res) => {
+    const post = await Post.findByIdAndDelete(req.params.id);
 
-    if(postId === -1) {
+    if(!post) {
         return res.status(404).json({
             status: "fail",
             message: "404 not found"
         })
     }
 
-    posts.splice(post, 1)
-
-    res.json(posts)
+    res.status(204).send();
 }
 
-const updatePost = (req, res) => {
-    const postId = parseInt(req.params.id)
+const updatePost = async (req, res) => {
+    const { id } = req.params;
+
     const { title, content } = req.body;
 
-    const post = posts.find(el => el === postId * 1)
+    const post = await Post.findById(id);
 
     if (!post) {
         return res.status(404).json({
@@ -73,7 +71,10 @@ const updatePost = (req, res) => {
     if(title) post.title = title
     if(content) post.content = content
 
-    res.json(post)
+    await post.save()
+
+
+    res.status(200).json(post)
 }
 
 module.exports = { getPosts, getPost, createPost, deletePost, updatePost }
