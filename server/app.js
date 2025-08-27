@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const mongoose = require("mongoose")
-const postRouter = require('./router/post.router.js')
+const postRouter = require("./routers/post.router.js")
 const userRouter = require("./routers/user.router.js")
 
 const app = express()
