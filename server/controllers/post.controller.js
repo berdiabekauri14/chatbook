@@ -1,25 +1,24 @@
 const Post = require("../models/post.model.js")
+const AppError = require("../utils/appError.js")
+const catchAsync = require("../utils/catchAsync.js")
 
-const getPosts = async (req, res) => {
+const getPosts = catchAsync(async (req, res) => {
     const posts = await Post.find();
 
     res.status(200).json(posts);
-}
+})
 
-const getPost = async (req, res) => {
+const getPost = catchAsync(async (req, res, next) => {
     const post = await Post.findById(req.params.id)
 
     if (post) {
         res.json(post)
     } else {
-        return res.status(404).json({
-            status: "fail",
-            message: "404 not found"
-        })
+        return next(new AppError("Post not found", 404))
     }
-}
+})
 
-const createPost = async (req, res) => {
+const createPost = catchAsync(async (req, res) => {
     const { title, content } = req.body;
 
     if (!title || !content) {
@@ -39,22 +38,19 @@ const createPost = async (req, res) => {
     )
 
     res.status(201).json(newPost);
-}
+})
 
-const deletePost = async (req, res) => {
+const deletePost = catchAsync(async (req, res, next) => {
     const post = await Post.findByIdAndDelete(req.params.id);
 
     if(!post) {
-        return res.status(404).json({
-            status: "fail",
-            message: "404 not found"
-        })
+        return next(new AppError("Post not found", 404))
     }
 
     res.status(204).send();
-}
+})
 
-const updatePost = async (req, res) => {
+const updatePost = catchAsync(async (req, res, next) => {
     const { id } = req.params;
 
     const { title, content } = req.body;
@@ -62,10 +58,7 @@ const updatePost = async (req, res) => {
     const post = await Post.findById(id);
 
     if (!post) {
-        return res.status(404).json({
-            status: "fail",
-            message: "404 not found"
-        })
+        return next(new AppError("Post not found", 404))
     }
 
     if(title) post.title = title
@@ -75,6 +68,6 @@ const updatePost = async (req, res) => {
 
 
     res.status(200).json(post)
-}
+})
 
 module.exports = { getPosts, getPost, createPost, deletePost, updatePost }
