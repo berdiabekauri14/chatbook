@@ -29,5 +29,5 @@ mongoose.connect(process.env.URL)
             console.log(`Server is running on port ${process.env.PORT}`);
         })
     })
-    .catch(() => console.log("Error has been found in your code"))
+    .catch(err => console.log(`Error: ${err}`))
 
