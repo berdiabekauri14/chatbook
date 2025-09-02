@@ -1,3 +1,7 @@
+const dotenv = require("dotenv")
+
+dotenv.config()
+
 const sendErrorDev = (err, req, res) => {
     res.status(err.statusCode).json({
         statusCode: err.statusCode,
