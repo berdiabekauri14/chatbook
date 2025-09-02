@@ -3,7 +3,10 @@ const AppError = require("../utils/appError.js")
 const catchAsync = require("../utils/catchAsync.js")
 
 const getPosts = catchAsync(async (req, res) => {
-    const posts = await Post.find();
+    const query = req.query
+    const posts = await Post.find({title: { $eq: query }});
+
+    posts.sort()
 
     res.status(200).json(posts);
 })
