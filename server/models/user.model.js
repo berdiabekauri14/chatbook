@@ -11,7 +11,9 @@ const userSchema = {
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        mixLength: [8, ["Password must require 8 or more letters"]]
     }
 }
 
