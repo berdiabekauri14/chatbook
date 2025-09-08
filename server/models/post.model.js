@@ -25,6 +25,10 @@ const postSchema = new mongoose.Schema(
                 type: String,
                 required: [true, "Author is required"]
             }
+        },
+        tags: {
+            type: Array,
+            required: true
         }
     }
 )
