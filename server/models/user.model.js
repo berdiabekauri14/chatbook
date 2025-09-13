@@ -9,6 +9,9 @@ const userSchema = {
         type: String,
         required: true
     },
+    role: {
+        default: "User"
+    },
     password: {
         type: String,
         required: true,
