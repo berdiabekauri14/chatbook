@@ -1,5 +1,6 @@
 const catchAsync = require("../utils/catchAsync.js")
 const User = require("../models/user.model.js")
+const AppError = require("../utils/appError.js")
 const jwt = require("jsonwebtoken")
 
 const signToken = (id, role) => { // გვჭირდება იმისთვის რომ აღარ მოგვეწიოს ხელახლად ტოკენის ხელმოწერა
@@ -41,7 +42,17 @@ const SignUp = catchAsync(async (req, res, next) => { // გვჭირდე�
     createSendToken(newUser, token)
 })
 
-module.exports = SignUp
+const logIn = catchAsync(async (req, res, next) => {
+    const { email, password } = req.body;
+
+    if (User.email !== email || User.password !== password) {
+        return new AppError("Email or password is incorrect", 403)
+    }
+
+    res.json("You succsefully logged in!")
+})
+
+module.exports = { SignUp, logIn }
 
 // ჩვენ cookies(ნამცხვრები) იმისთვის გვჭირდება რომ დავმალოთ ინფორმაცია და ტოკენები რომ არავინ არ შევიდეს ჩვენს შექმნილ user-ში
 
