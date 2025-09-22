@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "postId": 101,
+        "userId": 201,
+        "content": "Great post! Really enjoyed reading it.",
+        "createdAt": "2024-06-01T10:15:00Z"
+    },
+    {
+        "id": 2,
+        "postId": 102,
+        "userId": 202,
+        "content": "Thanks for sharing this information.",
+        "createdAt": "2024-06-01T11:20:00Z"
+    },
+    {
+        "id": 3,
+        "postId": 101,
+        "userId": 203,
+        "content": "I have a question about this topic.",
+        "createdAt": "2024-06-01T12:05:00Z"
+    }
+]
