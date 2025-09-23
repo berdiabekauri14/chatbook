@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const postRouter = require("./routers/post.router.js")
 const userRouter = require("./routers/user.router.js")
 const globalErrorHandler = require("./controllers/error.controller.js")
+const authRouter = require("./routers/auth.router.js")
 
 const app = express()
 
@@ -19,6 +20,8 @@ app.use(express.json())
 app.use("/api/posts", postRouter)
 
 app.use("/api/users", userRouter)
+
+app.use("/api/auth", authRouter)
 
 app.use(globalErrorHandler)
 

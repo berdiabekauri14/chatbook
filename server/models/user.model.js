@@ -1,24 +1,33 @@
 const mongoose = require("mongoose")
 
-const userSchema = {
-    fullName: {
+const userSchema = new mongoose.Schema({
+    fullname: {
         type: String,
-        required: true
+        required: [true, 'Fullname is required'],
     },
+
     email: {
         type: String,
-        required: true
+        required: [true, 'Email is required'],
+        unique: [true, 'Email must be unique']
     },
+
+    photo: String,
+
     role: {
-        default: "User"
+        enum: ['user', 'admin', 'moderator'],
+        default: 'user',
+        type: String
     },
+
     password: {
         type: String,
-        required: true,
-        unique: true,
-        mixLength: [8, ["Password must require 8 or more letters"]]
+        required: [true, 'Password is required'],
+        minLength: [6, 'Password must be at least 6 characters'],
+        select: false
     }
-}
+
+}, { timestamps: true });
 
 userSchema.pre('save', async function(next){
     if(!this.isModified('password')) return next();

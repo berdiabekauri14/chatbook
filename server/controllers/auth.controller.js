@@ -1,7 +1,7 @@
 const catchAsync = require("../utils/catchAsync.js")
-const User = require("../models/user.model.js")
 const AppError = require("../utils/appError.js")
 const jwt = require("jsonwebtoken")
+const User = require("../models/user.model.js")
 
 const signToken = (id, role) => { 
     return jwt.sign({ id, role }, process.env.JWT_SECRET, {
@@ -18,7 +18,7 @@ const createSendToken = (user, statusCode) => {
         secure: process.env.NODE_ENV = "development" ? false : true
     }
 
-    res.cookie("jwt", token, cookiesOption)
+    res.cookie("token", token, cookiesOption)
 
     newUser.password = undefined
 
@@ -40,6 +40,11 @@ const SignUp = catchAsync(async (req, res, next) => {
     const token = signToken(newUser._id, newUser.role)
 
     createSendToken(newUser, token)
+
+    res.status(201).json({
+        newUser,
+        token
+    })
 })
 
 const logIn = catchAsync(async (req, res, next) => {
