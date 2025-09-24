@@ -12,10 +12,10 @@ const createSendToken = (user, statusCode) => {
     const token = signToken(user._id, user.role)
 
     const cookiesOption = {
-        maxAge: new Date(
-            Date.now + process.env.COOKIES_EXPIRES * 24 * 60 * 60 * 1000),
+        maxAge: process.env.COOKIES_EXPIRES * 24 * 60 * 60 * 1000,
+        secure: process.env.NODE_ENV = "development" ? false : true,
         httpOnly: true,
-        secure: process.env.NODE_ENV = "development" ? false : true
+        sameSite: "Lax"
     }
 
     res.cookie("token", token, cookiesOption)
