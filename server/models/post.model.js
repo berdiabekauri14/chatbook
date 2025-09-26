@@ -8,6 +8,14 @@ const postSchema = new mongoose.Schema(
             mixLength: [3, "3 letters must be a minimum title"],
             unique: true
         },
+
+        fullname: {
+            type: String,
+            required: true
+        },
+
+        photoString: String,
+
         content: {
             type: String,
             required: true

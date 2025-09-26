@@ -34,6 +34,8 @@ const createPost = catchAsync(async (req, res) => {
 
     const newPost = await Post.create(
         {
+            userId: req.user._id,
+            fullname: req.user.fullname,
             title,
             content,
             likeCount: 0
