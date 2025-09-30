@@ -32,6 +32,10 @@ const createPost = catchAsync(async (req, res) => {
         })
     }
 
+    if (req.user._id.toString() !== post.userId) {
+        return next(new AppError("You dont have permission to delete other peoples post", 401))
+    }
+
     const newPost = await Post.create(
         {
             userId: req.user._id,
@@ -52,6 +56,10 @@ const deletePost = catchAsync(async (req, res, next) => {
         return next(new AppError("Post not found", 404))
     }
 
+    if (req.user._id.toString() !== post.userId) {
+        return next(new AppError("You dont have permission to delete other peoples post", 401))
+    }
+
     res.status(204).send();
 })
 
@@ -64,6 +72,10 @@ const updatePost = catchAsync(async (req, res, next) => {
 
     if (!post) {
         return next(new AppError("Post not found", 404))
+    }
+
+    if (req.user._id.toString() !== post.userId) {
+        return next(new AppError("You dont have permission to delete other peoples post", 401))
     }
 
     if(title) post.title = title
