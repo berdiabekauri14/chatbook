@@ -5,13 +5,13 @@ const transporter = nodemailer.createTransport({
     port: 2025,
     auth: {
         user: process.env.SMPT_USER,
-        pass: process.env.SMTP_PASS,
+        pass: process.env.SMTP_PASS
     }
 })
 
-const sendEmail = async (toString, text) => {
+const sendEmail = async (to, subject, text) => {
     try {
-        transporter.sendMail({
+        await transporter.sendMail({
             from: "<h1>Chatbook</h1>",
             to,
             subject,
@@ -21,7 +21,5 @@ const sendEmail = async (toString, text) => {
         console.log(`Error has been found ${err}`);
     }
 }
-
-sendEmail("example@gmail.com", "Verify Email", "Your code is 123456")
 
 module.exports = sendEmail;

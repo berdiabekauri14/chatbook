@@ -6,6 +6,7 @@ const postRouter = require("./routers/post.router.js")
 const userRouter = require("./routers/user.router.js")
 const globalErrorHandler = require("./controllers/error.controller.js")
 const authRouter = require("./routers/auth.router.js")
+const cookieParser = require("cookie-parser")
 
 const app = express()
 
@@ -14,6 +15,8 @@ dotenv.config();
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"))
 }
+
+app.user(cookieParser())
 
 app.use(express.json())
 
