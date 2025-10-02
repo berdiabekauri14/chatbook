@@ -79,7 +79,7 @@ const verifyEmail = catchAsync(async (req, res, next) => {
     
     await user.save({ validateBeforeSave: false });
 
-    res.status(200).send("<h1>User is verified</h1>")
+    res.status(200).send('<body style="display: flex; justify-content: center; align-items: center; height: 100vh"><h1>User is verified</h1></body>')
 })
 
 module.exports = { SignUp, logIn, verifyEmail }
