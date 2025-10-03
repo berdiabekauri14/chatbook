@@ -4,6 +4,8 @@ const authRouter = express.Router()
 
 const { SignUp, logIn, verifyEmail } = require("../controllers/auth.controller.js")
 
+const { protect } = require("../middlewares/auth.middleware.js")
+
 authRouter.post("/signup", SignUp)
 
 authRouter.post("/login", logIn)

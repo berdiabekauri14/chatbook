@@ -36,6 +36,10 @@ const protect = async (req, res, next) => {
             return next(new AppError("user cam't be found!", 404))
         }
 
+        if (!user.isVerified) {
+            return next(new AppError("User is not verified! please verify your email", 401))
+        }
+
         console.log(user)
 
         req.user = user;
