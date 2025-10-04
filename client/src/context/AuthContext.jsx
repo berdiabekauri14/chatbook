@@ -10,8 +10,6 @@ const API_URL = "http://localhost:3000/api"
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
-    
-    const navigate = Navigator()
 
     const login = async () => {
         try {
@@ -36,7 +34,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{login, signup, navigate, user}}>
+        <AuthContext.Provider value={{login, signup, user}}>
             {children}
         </AuthContext.Provider>
     )

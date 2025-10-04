@@ -15,11 +15,11 @@ export default function Login() {
     return (
         <form>
             <h1>Login</h1>
-            <input type="email" name="email" placeholder="Enter your email" required />
+            <input type="email" name="email" className=" border-2 rounded outline-0 p-3 m-3" placeholder="Enter your email" required />
             <br />
-            <input type="password" name="password" placeholder="Create a password" required />
+            <input type="password" name="password" className=" border-2 rounded outline-0 p-3 m-3" placeholder="Create a password" required />
             <br />
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleSubmit} className=" border-2 p-3 rounded cursor-pointer">Submit</button>
         </form>
     )
 }
