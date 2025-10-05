@@ -1,7 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
+import useAuth from "../hooks/useAuth"
 
 export default function Profile() {
     const [likes, setLikes] = useState(0)
+
+    const { addPost } = useAuth()
 
     const handleCreatePost = e => {
         const description = e.target.form.description.value;

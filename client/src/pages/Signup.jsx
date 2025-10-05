@@ -1,4 +1,9 @@
+import useAuth from "../hooks/useAuth";
+
 export default function Signup() {
+    const { signup } = useAuth()
+
+    signup()
 
     const handleSubmit = e => {
         const fullname = e.target.fullname;

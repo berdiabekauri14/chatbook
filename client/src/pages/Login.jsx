@@ -1,4 +1,9 @@
+import useAuth from "../hooks/useAuth";
+
 export default function Login() {
+    const { login } = useAuth()
+
+    login()
 
     const handleSubmit = e => {
         const email = e.target.email;
