@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from "react";
+import { autoLogin } from "../../../server/controllers/auth.controller";
 
 export const AuthContext = createContext();
 
@@ -34,7 +35,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{login, signup, user}}>
+        <AuthContext.Provider value={{login, signup, autoLogin, user}}>
             {children}
         </AuthContext.Provider>
     )

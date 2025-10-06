@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import useAuth from "../hooks/useAuth"
 
 export default function Profile() {
     const [likes, setLikes] = useState(0)
 
-    const { addPost } = useAuth()
+    const { user, addPost } = useAuth()
 
     const handleCreatePost = e => {
         const description = e.target.form.description.value;
@@ -56,12 +55,14 @@ export default function Profile() {
         <div>
             <h1 className=" text-4xl">Profile</h1>
             <br />
+            <h3>{user.fullname}</h3>
+            <br />
             <h2 className=" text-3xl">Create post:</h2>
             <br />
             <form name="form">
                 <textarea name="description" placeholder="Enter a description here" className=" border-2 rounded outline-0 p-3 m-3" required></textarea>
                 <br />
-                <button className=" border-2 p-3 rounded cursor-pointer" onClick={handleCreatePost}>Create post</button>
+                <button className=" border-2 p-3 rounded cursor-pointer" onClick={handleCreatePost} onChange={addPost}>Create post</button>
             </form>
             <br />
             {
