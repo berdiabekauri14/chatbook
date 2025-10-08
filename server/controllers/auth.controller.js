@@ -65,32 +65,20 @@ const logIn = catchAsync(async (req, res, next) => {
     res.json("You succsefully logged in!")
 })
 
-const autoLogin = catchAsync(async (req, res, next) => {
-    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+const autoLogin = (req, res, next) => {
+    const user = req.user;
 
-    if (!token) {
-        return next(new AppError("No token provided", 401));
+    if (user) {
+        return res.status(200).json(user)
     }
+}
 
-    let decoded;
-    try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-        return next(new AppError("Invalid or expired token", 401));
-    }
-
-    const user = await User.findById(decoded.id);
-    if (!user) {
-        return next(new AppError("User not found", 404));
-    }
-
-    user.password = undefined;
-
-    res.status(200).json({
-        user,
-        token
-    });
-});
+const logout = (req, res, next) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "development" ? false : true 
+    })
+}
 
 const verifyEmail = catchAsync(async (req, res, next) => {
     const { code } = req.params;
@@ -109,4 +97,4 @@ const verifyEmail = catchAsync(async (req, res, next) => {
     res.status(200).send('<body style="display: flex; justify-content: center; align-items: center; height: 100vh"><h1>User is verified</h1></body>')
 })
 
-module.exports = { SignUp, logIn, verifyEmail, autoLogin }
+module.exports = { SignUp, logIn, verifyEmail, autoLogin, logout }

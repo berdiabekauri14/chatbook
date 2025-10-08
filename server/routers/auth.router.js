@@ -2,7 +2,7 @@ const express = require("express")
 
 const authRouter = express.Router()
 
-const { SignUp, logIn, verifyEmail, autoLogin } = require("../controllers/auth.controller.js")
+const { SignUp, logIn, verifyEmail, autoLogin, logout } = require("../controllers/auth.controller.js")
 
 const { protect } = require("../middlewares/auth.middleware.js")
 
@@ -12,6 +12,8 @@ authRouter.post("/login", logIn)
 
 authRouter.get("/verify/:code", verifyEmail)
 
-authRouter.get("/login", autoLogin)
+authRouter.get("/auto-login", protect, autoLogin)
+
+authRouter.get("/log-out", protect, logout)
 
 module.exports = authRouter
