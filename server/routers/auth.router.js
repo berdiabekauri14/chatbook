@@ -14,6 +14,6 @@ authRouter.get("/verify/:code", verifyEmail)
 
 authRouter.get("/auto-login", protect, autoLogin)
 
-authRouter.get("/log-out", protect, logout)
+authRouter.post("/logout", protect, logout)
 
 module.exports = authRouter

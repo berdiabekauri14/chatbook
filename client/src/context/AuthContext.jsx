@@ -89,7 +89,7 @@ export const AuthProivder = ({ children }) => {
     const logout = async () => {
         try {
             const res = await fetch(`${API_URL}/auth/log-out`, {
-                method: "GET",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },

@@ -76,8 +76,11 @@ const autoLogin = (req, res, next) => {
 const logout = (req, res, next) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "development" ? false : true 
+        secure: process.env.NODE_ENV === "development" ? false : true ,
+        sameSite: "Lax"
     })
+
+    return res.status(200).json({ message: "You have logged out succesfuly" })
 }
 
 const verifyEmail = catchAsync(async (req, res, next) => {
