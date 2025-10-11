@@ -1,10 +1,14 @@
+/* eslint-disable no-undef */
 import { useState } from "react";
 import useAuth from "../hooks/useAuth"
+import { usePosts } from "../context/Postcontext";
 
 export default function Profile() {
-    const [likes, setLikes] = useState(0)
+    const [likes, setLikes] = useState(0);
 
-    const { user, addPost } = useAuth()
+    const { user } = useAuth();
+
+    const { posts, deletePost, updatePost, addPost } = usePosts();
 
     const handleCreatePost = e => {
         const description = e.target.form.description.value;
@@ -30,12 +34,6 @@ export default function Profile() {
             setLikes(likes - 1)
         }
         
-    }
-
-    const deletePost = () => {
-        alert("Post was deleted!")
-        
-        localStorage.clear()
     }
 
     const html = (
@@ -67,6 +65,37 @@ export default function Profile() {
             <br />
             {
                 localStorage.getItem("Post description") !== "" ? html : <></>
+            }
+            {
+                !posts ? 'No Posts Found' : posts.map(post => {
+                    return (
+                        <li key={post._id}>
+                            <p>Created By: {post.fullname}</p>
+
+                            {
+                                updateToggle ? (
+                                    <form>
+                                        <div>
+                                            <label htmlFor="title">Post title: </label>
+                                            <input type="text" id="title" placeholder="Enter a title" defaultValue={post.title} />
+                                            <br />
+                                            <label htmlFor="Content">Content: </label>
+                                            <input type="text" id="Content" placeholder="Enter content" defaultValue={post.content} />
+                                        </div>
+                                    </form>
+                                ) : (
+                                    <>
+                                        <h3>{post.title}</h3>
+                                        <p>Content: {post.content}</p>
+                                        <br />
+                                        <button onClick={deletePost}>Delete</button>
+                                        <button onClick={updatePost}>Update</button>
+                                    </>
+                                )
+                            }
+                        </li>
+                    )
+                })
             }
         </div>
     )
