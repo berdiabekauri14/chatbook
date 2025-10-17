@@ -11,7 +11,7 @@ export const useAuth = () => useContext(AuthContext);
 
 const API_URL = "http://localhost:3000/api";
 
-export const AuthProivder = ({ children }) => {
+export function AuthProvider({ children }){
     const [user, setUser] = useState(null);
 
     const navigate = useNavigate();
