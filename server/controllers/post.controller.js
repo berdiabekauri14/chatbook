@@ -23,6 +23,7 @@ const getPost = catchAsync(async (req, res, next) => {
 
 const createPost = catchAsync(async (req, res) => {
     const { title, content } = req.body;
+    const { file } = req
 
     if (!title || !content) {
         return res.status(403).json({
@@ -42,7 +43,8 @@ const createPost = catchAsync(async (req, res) => {
             fullname: req.user.fullname,
             title,
             content,
-            likeCount: 0
+            likeCount: 0,
+            postImage: file ? file.filename : null
         }
     )
 
