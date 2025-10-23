@@ -26,6 +26,8 @@ app.use("/api/users", userRouter)
 
 app.use("/api/auth", authRouter)
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 app.use(globalErrorHandler)
 
 mongoose.connect(process.env.URL)
