@@ -7,6 +7,11 @@ const userRouter = require("./routers/user.router.js")
 const globalErrorHandler = require("./controllers/error.controller.js")
 const authRouter = require("./routers/auth.router.js")
 const cookieParser = require("cookie-parser")
+const helmet = require("helmet")
+const mongoSanitize = require("mongo-sanitizer")
+const path = require("path")
+const xss = require("xss")
+const rateLimit = require("express-rate-limit")
 
 const app = express()
 
@@ -16,7 +21,19 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"))
 }
 
-app.user(cookieParser())
+app.use(cookieParser())
+
+app.use(helmet())
+
+app.use(mongoSanitize())
+
+app.use(xss())
+
+app.use(rateLimit({
+    windowsMs: 60 * 60 * 1000,
+    max: 100,
+    message: "too many request from this IP, please try again after an hour"
+}))
 
 app.use(express.json())
 
